@@ -18,11 +18,18 @@ module ActiveRecord
           end
           Arel::Attributes::Attribute.new(insert_arel, c)
         end
+        insert_sql = insert_arel.to_sql
+
+        # Remove insert quote for only mysql adapters
+        if ['MySql', 'Mysql2'].include? @klass.connection.adapter_name
+          insert_sql = insert_arel.to_sql.delete!('`').gsub!('\'', '`')
+        end
 
         select_column = self.get_select_column columns, override, ignore
         self.select_values = []
         select_arel = self.select(select_column)
-        @klass.connection.execute "#{insert_arel.to_sql} #{select_arel.to_sql}"
+
+        @klass.connection.execute "#{insert_sql} #{select_arel.to_sql}"
       end
 
       def get_select_column target, override, ignore
