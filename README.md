@@ -40,6 +40,10 @@ Example:
 
 ## Change log
 
+### version 0.9.1
+
+* fixes mysql not run bugs.
+
 ### version 0.9.0
 
 * Release beta
