@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-FromClass.relation.pickin(IntoClass, {column: value or column})
+FromClass.relation.pickin(IntoClass, {select_override_column: value or column}, [ignore])
 
 Example:
 
